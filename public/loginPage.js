@@ -1,14 +1,26 @@
 "use strict";
 
-class UserForm {
-    loginFormCallback;
-    registerFormCallback;
-}
-
-class ApiConnector {
-    login({ login, password }, callback)
-    register({ login, password }, callback)
-}
-
 const userForm = new UserForm();
-userForm.loginFormCallback = 
+userForm.loginFormCallback = (data) => {
+    ApiConnector.login(data, (response) => {
+        console.log(response);
+    });
+}
+
+if (success) {
+    location.reload();
+} else {
+    setLoginErrorMessage(message);
+}
+
+userForm.registerFormCallback = (data) => {
+    ApiConnector.login(data, (response) => {
+        console.log(response);
+    });
+}
+
+if (success) {
+    location.reload();
+} else {
+    setRegisterErrorMessage(message);
+}
