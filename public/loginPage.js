@@ -4,23 +4,23 @@ const userForm = new UserForm();
 userForm.loginFormCallback = (data) => {
     ApiConnector.login(data, (response) => {
         console.log(response);
-    });
-}
 
-if (success) {
-    location.reload();
-} else {
-    setLoginErrorMessage(message);
+        if (response.success) {
+            location.reload();
+        } else {
+            userForm.setLoginErrorMessage(response.error);
+        }
+    });
 }
 
 userForm.registerFormCallback = (data) => {
     ApiConnector.login(data, (response) => {
         console.log(response);
-    });
-}
 
-if (success) {
-    location.reload();
-} else {
-    setRegisterErrorMessage(message);
+        if (response.success) {
+            location.reload();
+        } else {
+            userForm.setRegisterErrorMessage(response.error);
+        }
+    });
 }
