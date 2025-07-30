@@ -9,20 +9,19 @@ logoutButton.action = () => {
 
 ApiConnector.current((response) => {
     if (response.success) {
-        ProfileWidget.showProfile(response);
+        ProfileWidget.showProfile(response.data);
     }
 })
 
 const ratesBoard = new RatesBoard;
-ratesBoard.func = () => {
+function getRates() {
     ApiConnector.getStocks((response) => {
         if (response.success) {
             clearTable();
-            fillTable(data);
+            fillTable(response.data);
         }
     })
-
 }
 
-func();
-const intervalId = setInterval(func, 60000);
+getRates();
+const intervalId = setInterval(getRates, 60000);
