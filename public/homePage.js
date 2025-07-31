@@ -17,11 +17,23 @@ const ratesBoard = new RatesBoard;
 function getRates() {
     ApiConnector.getStocks((response) => {
         if (response.success) {
-            clearTable();
-            fillTable(response.data);
+            ratesBoard.clearTable();
+            ratesBoard.fillTable(response.data);
         }
     })
 }
 
 getRates();
 const intervalId = setInterval(getRates, 60000);
+
+const moneyManager = new MoneyManager;
+moneyManager.addMoneyCallback = (data) => {
+    ApiConnector.addMoney(data, (response) => {
+        if (response.success) {
+            ProfileWidget.showProfile(response.data);
+        }
+        moneyManager.setMessage(response.success);
+        moneyManager.setMessage(response.error);
+
+    })
+}
